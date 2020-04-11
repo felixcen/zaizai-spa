@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ZaizaiDate-SPA"
+    }
+  },
+  "defaultProject": "ZaizaiDate-SPA",
+  "cli": {
+    "analytics": "00e8e8da-81d6-4939-86b3-9307892df2a9"
+  }
 }
