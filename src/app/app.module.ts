@@ -10,12 +10,17 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptor, ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes';
-import { AuthGuard } from './_guards/auth.guard';
+import { appRoutes } from './routes'; 
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetterFromLocalStorage(){
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -24,6 +29,7 @@ import { AuthGuard } from './_guards/auth.guard';
       HomeComponent,
       RegisterComponent,
       MemberListComponent,
+      MemberCardComponent,
       ListsComponent,
       MessagesComponent
    ],
@@ -33,7 +39,14 @@ import { AuthGuard } from './_guards/auth.guard';
       FormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetterFromLocalStorage,
+            whitelistedDomains: ['localhost:44398'],
+            blacklistedRoutes: ['localhost:44398/auth']
+         }
+      })
    ],
    providers: [
       AuthService,
