@@ -2,7 +2,7 @@
   <a class="navbar-brand" [routerLink]="['/home']">Zaizai Date</a>
   
   <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/members']">Matches</a>
       </li>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <form #loginForm="ngForm" *ngIf="!loggedIn()" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" >
+    <form #loginForm="ngForm" *ngIf="!loggedIn()" class="form-inline mt-2 mt-md-0 float-right" (ngSubmit)="login()" >
       <input class="form-control mr-sm-2" type="text" name="userName" #userName="ngModel"  placeholder="Username" required [(ngModel)]="model.userName">
       <input class="form-control mr-sm-2" type="password" name="password" #password="ngModel" placeholder="Password" required [(ngModel)]="model.password">
       <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
