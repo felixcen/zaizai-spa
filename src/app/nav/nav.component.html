@@ -15,6 +15,11 @@
       </li>
     </ul>
 
+    <ul class="navbar-nav mr-auto" *ngIf="!loggedIn()">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/register']"></a>
+      </li>
+    </ul>
 
     <div *ngIf="loggedIn()"  class="dropdown" dropdown>
       <a class="dropdown-toggle text-light" dropdownToggle>
@@ -28,6 +33,7 @@
 
       </div>
     </div>
+
 
     <form #loginForm="ngForm" *ngIf="!loggedIn()" class="form-inline mt-2 mt-md-0 float-right" (ngSubmit)="login()" >
       <input class="form-control mr-sm-2" type="text" name="userName" #userName="ngModel"  placeholder="Username" required [(ngModel)]="model.userName">
